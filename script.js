@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Получаем данные активности по ключу
     if (activityKey) {
-        fetch(`/api/get_activity?key=${activityKey}`)
+        fetch(`https://neomlet.github.io/api/get_activity?key=${activityKey}`)
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`Ошибка HTTP: ${response.status}`);
