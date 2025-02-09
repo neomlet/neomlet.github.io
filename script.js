@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         fetch(`/api/get_activity?key=${activityKey}`)
             .then(response => {
                 if (!response.ok) {
-                    throw new Error("Ошибка при получении данных");
+                    throw new Error(`Ошибка HTTP: ${response.status}`);
                 }
                 return response.json();
             })
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => {
                 console.error("Ошибка при получении данных:", error);
-                activityTree.textContent = "Произошла ошибка при загрузке данных.";
+                activityTree.textContent = `Произошла ошибка при загрузке данных: ${error.message}`;
             });
     } else {
         activityTree.textContent = "Ключ активности не указан.";
