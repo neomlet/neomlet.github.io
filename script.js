@@ -1,9 +1,34 @@
 document.addEventListener("DOMContentLoaded", function () {
     const activityTree = document.getElementById("activity-tree");
 
-    // Получаем данные из параметров URL
+    // Получаем ключ из параметров URL
     const urlParams = new URLSearchParams(window.location.search);
-    const activityData = JSON.parse(urlParams.get("activity"));
+    const activityKey = urlParams.get("key");
+
+    // Получаем данные активности по ключу
+    if (activityKey) {
+        fetch(`/api/get_activity?key=${activityKey}`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Ошибка при получении данных");
+                }
+                return response.json();
+            })
+            .then(activityData => {
+                if (activityData && !activityData.error) {
+                    const tree = createActivityTree(activityData);
+                    activityTree.appendChild(tree);
+                } else {
+                    activityTree.textContent = "Нет данных для отображения.";
+                }
+            })
+            .catch(error => {
+                console.error("Ошибка при получении данных:", error);
+                activityTree.textContent = "Произошла ошибка при загрузке данных.";
+            });
+    } else {
+        activityTree.textContent = "Ключ активности не указан.";
+    }
 
     // Функция для создания дерева активности
     function createActivityTree(data) {
@@ -28,13 +53,5 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
         return tree;
-    }
-
-    // Отображение дерева активности
-    if (activityData) {
-        const tree = createActivityTree(activityData);
-        activityTree.appendChild(tree);
-    } else {
-        activityTree.textContent = "Нет данных для отображения.";
     }
 });
