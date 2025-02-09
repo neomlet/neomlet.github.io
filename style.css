@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f6f8fa;
+    color: #24292e;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #2cbe4e;
+}
+
+#activity-tree {
+    margin-top: 20px;
+}
+
+.activity-tree {
+    list-style-type: none;
+    padding: 0;
+}
+
+.event-item {
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #ffffff;
+    border-left: 4px solid #2cbe4e;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.event-type {
+    font-weight: bold;
+    color: #24292e;
+}
+
+.event-details {
+    font-size: 0.9em;
+    color: #586069;
+}
